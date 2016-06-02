@@ -1,0 +1,120 @@
+{
+	"jpsType": "install",
+	"jpsVersion": "0.2",
+	"application": {
+		"id": "postaddon",
+		"name": "JNDI Params",
+		"version": "x.x",
+		"type": "java",
+		"homepage": "http://jelastic.com/",
+		"logo": "https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/images/postaddon.png",
+		"description": {
+			"text": "Application description"
+		},
+		"env": {
+			"topology": {
+				"ha": false,
+				"engine": "java6",
+				"ssl": false,
+				"nodes": [{
+						"extip": false,
+						"count": 1,
+						"cloudlets": 8,
+						"nodeType": "tomcat7"
+					}, {
+						"extip": false,
+						"count": 1,
+						"cloudlets": 8,
+						"nodeType": "mysql5"
+					}
+				]
+			},
+			"onAfterCloneNodes": {
+				"call": [
+						"testProc",
+						"InitProcedure"
+				]
+			},
+			"onAfterRemoveNode": {
+				"call": [
+						"testProc",
+						"InitProcedure"
+				]
+			},
+			"onAfterAddNode": {
+				"call": [
+						"testProc",
+						"InitProcedure"
+				]
+			},
+			"onInit": {
+				"call": [
+						"createConfigFile",
+						"testProc",
+						"InitProcedure"
+				]
+			}
+		},
+		"procedures": [{
+				"id": "createConfigFile",
+				"onCall": [{
+						"executeShellCommands": [{
+								"nodeMission": "cp",
+								"commands": [
+										"touch ${HOME}/mobileapp-server-api.properties"
+								]
+							}
+						]
+					}, {
+						"writeFile": [{
+								"nodeMission": "cp",
+								"path": "${HOME}/mobileapp-server-api.properties",
+								"body": "//StartJel\n\n//EndJel"
+							}
+						]
+					}
+				]
+			}, {
+				"id": "testProc",
+				"onCall": [{
+						"executeShellCommands": [{
+								"nodeMission": "cp",
+								"commands": [
+										"sed -i '/StartJel/,/EndJel/{//!d}' ${HOME}/mobileapp-server-api.properties"
+								]
+							}
+						]
+					}
+				]
+			}, {
+				"id": "InitProcedure",
+				"onCall": [{
+						"executeScript": {
+							"type": "javascript",
+							"script": "https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/scripts/cloneNodes.js"
+						}
+					}
+				]
+			}, {
+				"id": "SQLReplace",
+				"onCall": [{
+						"replaceInFile": [{
+								"nodeMission": "cp",
+								"path": "${HOME}/mobileapp-server-api.properties",
+								"replacements": [{
+										"pattern": "//StartJel",
+										"replacement": "//StartJel\n${this.replacement}\n"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"success": {
+			"text": "",
+			"email": " "
+		}
+	}
+}
