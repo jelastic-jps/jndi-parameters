@@ -1,7 +1,7 @@
 # Jelastic JNDI Params Installation Package 
 
 This repository provides [JNDI Params](http://jelastic.com/) JPS-based installation package for Jelastic Platform.
-[![GET IT HOSTED](https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/images/getithosted.png)](http://go.jelastic.com/test?hoster-select=1&theme=modern&app=https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/JNDI-Params_1.0.json)
+
 
 **JNDI Params** is an JPS-based installation packadge for tomcat + mysql environment creation.
 
