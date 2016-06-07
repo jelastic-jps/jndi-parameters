@@ -8,7 +8,7 @@ port=$6
 name=$7
 
 if [ "sqldb" == "${nodeGroup}" ]; then \
-   PASSWORD=`cat /var/log/jem.log | grep "passwd" | awk -F \ \ '{print $6}' | tail -n1` \
+   PASSWORD=`cat /var/log/jem.log | grep "passwd" | awk -F " " '{print $6}' | tail -n1` \
    ; if [ "`expr index ${nodeType} mysql`" == "0" ]; then \
       nodeType=mysql \
       nodeTypeSQL=mysql \
