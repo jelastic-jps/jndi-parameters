@@ -7,7 +7,7 @@
 		"version": "x.x",
 		"type": "java",
 		"homepage": "http://jelastic.com/",
-		"logo": "https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/images/postaddon.png",
+		"logo": "https://raw.githubusercontent.com/jelastic-jps/JNDI-Params/master/images/postaddon.png",
 		"description": {
 			"text": "Application description"
 		},
@@ -91,7 +91,7 @@
 				"onCall": [{
 						"executeScript": {
 							"type": "javascript",
-							"script": "https://raw.githubusercontent.com/JelasticJPS/JNDI-Params/master/scripts/cloneNodes.js"
+							"script": "https://raw.githubusercontent.com/jelastic-jps/JNDI-Params/master/scripts/cloneNodes.js"
 						}
 					}
 				]
