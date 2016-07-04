@@ -1,47 +1,38 @@
-# Jelastic JNDI Params Installation Package 
+[![JNDI Parameters](images/postaddon.png)](../../../jndi-parameters)
+## JNDI Parameters
 
-This repository provides [JNDI Params](http://jelastic.com/) JPS-based installation package for Jelastic Platform.
+The JPS package deploys JNDI Parameters that initially contains 1 application server and 1 database container. 
 
-
-**JNDI Params** is an JPS-based installation packadge for tomcat + mysql environment creation.
-
-**Engine**: java6
-
-**Environment topology**:
-
-1. 
-   - node type: tomcat7
-   - count: 1
-   - cloudlets: 8
-   - external IP: false <br />
-<br />
-2. 
-   - node type: mysql5
-   - count: 1
-   - cloudlets: 8
-   - external IP: false
- 
-
-### What it can be used for?
+### Highlights
+This package is designed to deploy JNDI Parameters environment is an JPS-based installation packadge for tomcat + mysql environment creation.<br />
 Create tomcat + mysql environment. Create mobileapp-server-api.properties file and store environment parameters (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId, bl.address, bl.port) in it.
 
+### Environment Topology
 
-### What Jelastic JPS package is?
+![JNDI Parameters Topology](https://docs.google.com/drawings/d/1QotJRxHlNVesRTOscuZcx3DGOCOib05hgnGoSYDEyeQ/pub?w=505&h=216)
 
-Jelastic JPS package represents an one-click installation solution, that allows to get the desired project hosted at Jelastic Cloud in a matter of minutes. Being based on [Jelastic Packaging Standard](https://docs.jelastic.com/jps), it automates creation of the necessary environment and subsequent application deployment to it. Herewith, all of the required properties and behaviors are predefined within the package JSON manifest, so you instantly get the ready-to-go solution.
-The full list of the available at a platform one-click packages can be seen at the corresponding same-named section of [Jelastic Marketplace](https://docs.jelastic.com/marketplace#apps].
+### Specifics
 
-### How to deploy a package?
-###### For Developers
+Layer                |     Server    | Number of CTs <br/> by default | Cloudlets per CT <br/> (reserved/dynamic) | Options
+-------------------- | --------------| :----------------------------: | :---------------------------------------: | :-----:
+AS                   | Tomcat Java |       1                        |           1 / 16                          | -
+DB                   |    MySQL      |       1                        |           1 / 16                           | -
 
-In case you can’t find the desired solution within the list of available ones at your dashboard, just copy and save the content of its manifest as a *.json* file and [import](https://docs.jelastic.com/environment-export-import#import) it to the dashboard. Herewith, you can apply any necessary adjustments to template settings through this file (if such are required) and install its customized version in the similar way.
+* AS - Application server 
+* DB - Database 
+* CT - Container
 
-###### For Cluster Admins
+**Alfresco Version**: x.x<br/>
+**Tomcat Version**: 7.0.67<br/>
+**Java Engine**: Java 6<br/>
+**MySQL Database**: 5.7.12
 
-In order to add the desired JPS package to your platform and make it available for users, perform the following:
-- copy content of its manifest 
-- switch to the [Marketplace](http://ops-docs.jelastic.com/marketplace-46) section of your JCA panel and choose **Add > New Installation** menu option
-- paste the copied strings into the appeared frame and **Save** the template
-- choose your newly added package within the list and click on **Publish** above
+### Deployment
 
-Also, you are able to adjust the given package template according to your needs and provide its customized version.
+In order to get this solution instantly deployed, click the "Get It Hosted Now" button, specify your email address within the widget, choose one of the [Jelastic Public Cloud providers](https://jelastic.cloud) and press Install.
+
+[![GET IT HOSTED](https://raw.githubusercontent.com/jelastic-jps/jpswiki/master/images/getithosted.png)](https://jelastic.com/install-application/?manifest=https%3A%2F%2Fgithub.com%2Fjelastic-jps%2Fjndi-parameters%2Fraw%2Fmaster%2Fmanifest.jps)
+
+To deploy this package to Jelastic Private Cloud, import [this JPS manifest](../../raw/master/manifest.jps) within your dashboard ([detailed instruction](https://docs.jelastic.com/environment-export-import#import)).
+
+More information about Jelastic JPS package and about installation widget for your website can be found in the [Jelastic JPS Application Package](https://github.com/jelastic-jps/jpswiki/wiki/Jelastic-JPS-Application-Package) reference.
