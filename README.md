@@ -15,8 +15,8 @@ Create tomcat + mysql environment. Create mobileapp-server-api.properties file a
 
 Layer                |     Server    | Number of CTs <br/> by default | Cloudlets per CT <br/> (reserved/dynamic) | Options
 -------------------- | --------------| :----------------------------: | :---------------------------------------: | :-----:
-AS                   | Tomcat Java |       1                        |           1 / 16                          | -
-DB                   |    MySQL      |       1                        |           1 / 16                           | -
+AS                   | Tomcat Java |       1                        |           1 / 8                          | -
+DB                   |    MySQL      |       1                        |           1 / 8                           | -
 
 * AS - Application server 
 * DB - Database 
