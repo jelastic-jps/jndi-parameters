@@ -22,7 +22,7 @@ DB                   |    MySQL      |       1                        |         
 * DB - Database 
 * CT - Container
 
-**Alfresco Version**: x.x<br/>
+**JNDI Parameters Version**: x.x<br/>
 **Tomcat Version**: 7.0.67<br/>
 **Java Engine**: Java 6<br/>
 **MySQL Database**: 5.7.12
