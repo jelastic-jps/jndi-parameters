@@ -9,7 +9,7 @@
 		"homepage": "http://jelastic.com/",
 		"logo": "https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/images/postaddon.png",
 		"description": {
-			"text": "Is an JPS-based installation packadge for tomcat + mysql environment creation. Create mobileapp-server-api.properties file and store environment parameters (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId, bl.address, bl.port) in it."
+			"text": "JNDI Params is an JPS-based installation packadge for tomcat + mysql environment creation. Create mobileapp-server-api.properties file and store environment parameters (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId, bl.address, bl.port) in it."
 		},
 		"env": {
 			"topology": {
