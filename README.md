@@ -9,7 +9,7 @@ Create tomcat + mysql environment. Create mobileapp-server-api.properties file a
 
 ### Environment Topology
 
-![JNDI Parameters Topology](https://docs.google.com/drawings/d/1QotJRxHlNVesRTOscuZcx3DGOCOib05hgnGoSYDEyeQ/pub?w=505&h=216)
+![jndi-parameters-environment-topology](images/jndi-parameters-environment-topology.png)
 
 ### Specifics
 
