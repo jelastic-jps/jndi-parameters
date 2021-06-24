@@ -8,7 +8,7 @@ description: JNDI Parameters is an JPS-based installation packadge for tomcat + 
     (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId,
     bl.address, bl.port) in it.
 baseUrl: https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/
-engine: java8
+engine: openjdk8
 
 nodes:
 - cloudlets: 8
