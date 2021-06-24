@@ -7,6 +7,7 @@ description: JNDI Parameters is an JPS-based installation packadge for tomcat + 
     creation. Create mobileapp-server-api.properties file and store environment parameters
     (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId,
     bl.address, bl.port) in it.
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/
 engine: java8
 
 nodes:
@@ -45,7 +46,7 @@ actions:
     - cmd [cp]: sed -i '/StartJel/,/EndJel/{//!d}' ${HOME}/mobileapp-server-api.properties
 
   InitProcedure:
-    script: http://owncloud-clone.demo.jelastic.com/public.php?service=files&t=2fc8b89c26c76d8d8ddbf7749c799a97download
+    script: scripts/cloneNodes.js
   
   SQLReplace:
     replaceInFile:
