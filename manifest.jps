@@ -1,126 +1,62 @@
-{
-  "jpsType": "install",
-  "application": {
-    "id": "postaddon",
-    "name": "JNDI Parameters",
-    "version": "x.x",
-    "type": "java",
-    "homepage": "http://jelastic.com/",
-    "logo": "https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/images/postaddon.png",
-    "description": {
-      "text": "JNDI Parameters is an JPS-based installation packadge for tomcat + mysql environment creation. Create mobileapp-server-api.properties file and store environment parameters (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId, bl.address, bl.port) in it."
-    },
-    "env": {
-      "topology": {
-        "engine": "openjdk8",
-        "nodes": [
-          {
-            "cloudlets": 8,
-            "nodeType": "tomcat7"
-          },
-          {
-            "cloudlets": 8,
-            "nodeType": "mysql5"
-          }
-        ]
-      },
-      "onAfterCloneNodes": {
-        "call": [
-          "testProc",
-          "InitProcedure"
-        ]
-      },
-      "onAfterRemoveNode": {
-        "call": [
-          "testProc",
-          "InitProcedure"
-        ]
-      },
-      "onAfterAddNode": {
-        "call": [
-          "testProc",
-          "InitProcedure"
-        ]
-      }
-    },
-    "onInstall": {
-      "call": [
-        "createConfigFile",
-        "testProc",
-        "InitProcedure"
-      ]
-    },
-    "procedures": [
-      {
-        "id": "createConfigFile",
-        "onCall": [
-          {
-            "executeShellCommands": [
-              {
-                "nodeMission": "cp",
-                "commands": [
-                  "touch ${HOME}/mobileapp-server-api.properties"
-                ]
-              }
-            ]
-          },
-          {
-            "writeFile": [
-              {
-                "nodeMission": "cp",
-                "path": "${HOME}/mobileapp-server-api.properties",
-                "body": "//StartJel\n\n//EndJel"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "testProc",
-        "onCall": [
-          {
-            "executeShellCommands": [
-              {
-                "nodeMission": "cp",
-                "commands": [
-                  "sed -i '/StartJel/,/EndJel/{//!d}' ${HOME}/mobileapp-server-api.properties"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "InitProcedure",
-        "onCall": [
-          {
-            "executeScript": {
-              "type": "javascript",
-              "script": "https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/scripts/cloneNodes.js"
-            }
-          }
-        ]
-      },
-      {
-        "id": "SQLReplace",
-        "onCall": [
-          {
-            "replaceInFile": [
-              {
-                "nodeMission": "cp",
-                "path": "${HOME}/mobileapp-server-api.properties",
-                "replacements": [
-                  {
-                    "pattern": "//StartJel",
-                    "replacement": "//StartJel\n${this.replacement}\n"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "success": "Application server and database container have been created. <br>File with environment parameters has been saved at /opt/tomcat/temp/mobileapp-server-api.properties on compute layer."
-  }
-}
+type: install
+id: postaddon
+name: JNDI Parameter
+homepage: http://jelastic.com/
+logo: https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/images/postaddon.png
+description: JNDI Parameters is an JPS-based installation packadge for tomcat + mysql environment
+    creation. Create mobileapp-server-api.properties file and store environment parameters
+    (cp.url, cp.nodeId, cp.address, cp.port, db cretentials/url, bl.url, bl.nodeId,
+    bl.address, bl.port) in it.
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/jndi-parameters/master/
+engine: openjdk8
+
+nodes:
+- cloudlets: 8
+  nodeType: tomcat7
+- cloudlets: 8
+  nodeType: mysql5
+  
+onAfterCloneNodes:
+- testProc
+- InitProcedure
+
+onAfterRemoveNode:
+- testProc
+- InitProcedure
+
+onAfterAddNode:
+- testProc
+- InitProcedure
+
+onInstall:
+- createConfigFile
+- testProc
+- InitProcedure
+
+actions:
+  createConfigFile:
+    - cmd [cp]: touch ${HOME}/mobileapp-server-api.properties
+    - writeFile [cp]:
+        path: "${HOME}/mobileapp-server-api.properties"
+        body: |-
+          //StartJel
+
+          //EndJel
+  testProc:
+    - cmd [cp]: sed -i '/StartJel/,/EndJel/{//!d}' ${HOME}/mobileapp-server-api.properties
+
+  InitProcedure:
+    script: scripts/cloneNodes.js
+  
+  SQLReplace:
+    replaceInFile:
+      nodeMission: cp
+      path: "${HOME}/mobileapp-server-api.properties"
+      replacements:
+      - pattern: "//StartJel"
+        replacement: |
+          //StartJel
+          ${this.replacement}
+success: |
+  Application server and database container have been created.  
+  File with environment parameters has been saved at /opt/tomcat/temp/mobileapp-server-api.properties on compute layer.
