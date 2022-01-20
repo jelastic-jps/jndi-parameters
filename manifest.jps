@@ -12,7 +12,7 @@ engine: openjdk8
 
 nodes:
 - cloudlets: 8
-  nodeType: tomcat7
+  nodeType: tomcat
 - cloudlets: 8
   nodeType: mysql5
   
